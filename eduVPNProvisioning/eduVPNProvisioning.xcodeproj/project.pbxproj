@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6F5DDA7B29A89F5000374427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DDA7A29A89F5000374427 /* AppDelegate.swift */; };
+		6F5DDA7D29A89F5000374427 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DDA7C29A89F5000374427 /* ViewController.swift */; };
+		6F5DDA7F29A89F5100374427 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DDA7E29A89F5100374427 /* Assets.xcassets */; };
+		6F5DDA8229A89F5100374427 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DDA8029A89F5100374427 /* Main.storyboard */; };
+		6F5DDA9029A89FB500374427 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5DDA8F29A89FB500374427 /* NetworkExtension.framework */; };
+		6F5DDA9329A89FB500374427 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DDA9229A89FB500374427 /* PacketTunnelProvider.swift */; };
+		6F5DDA9529A89FB500374427 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DDA9429A89FB500374427 /* main.swift */; };
+		6F5DDA9A29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 6F5DDA8D29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F5DDAA429AC6FFD00374427 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DDAA129AC6FFD00374427 /* Config.xcconfig */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6F5DDA9829A89FB500374427 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F5DDA6F29A89F5000374427 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F5DDA8C29A89FB500374427;
+			remoteInfo = TunnelExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6F5DDA9E29A89FB500374427 /* Embed System Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SYSTEM_EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+				6F5DDA9A29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension in Embed System Extensions */,
+			);
+			name = "Embed System Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6F5DDA7729A89F5000374427 /* eduVPNProvisioning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eduVPNProvisioning.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F5DDA7A29A89F5000374427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6F5DDA7C29A89F5000374427 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6F5DDA7E29A89F5100374427 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6F5DDA8129A89F5100374427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6F5DDA8329A89F5100374427 /* eduVPNProvisioning.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eduVPNProvisioning.entitlements; sourceTree = "<group>"; };
+		6F5DDA8D29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = net.roopc.eduVPNProvisioning.TunnelExtension.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F5DDA8F29A89FB500374427 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		6F5DDA9229A89FB500374427 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		6F5DDA9429A89FB500374427 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6F5DDA9629A89FB500374427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F5DDA9729A89FB500374427 /* TunnelExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TunnelExtension.entitlements; sourceTree = "<group>"; };
+		6F5DDAA129AC6FFD00374427 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Config/Config.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6F5DDA7429A89F5000374427 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F5DDA8A29A89FB500374427 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F5DDA9029A89FB500374427 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6F5DDA6E29A89F5000374427 = {
+			isa = PBXGroup;
+			children = (
+				6F5DDAA129AC6FFD00374427 /* Config.xcconfig */,
+				6F5DDA7929A89F5000374427 /* eduVPNProvisioning */,
+				6F5DDA9129A89FB500374427 /* TunnelExtension */,
+				6F5DDA8E29A89FB500374427 /* Frameworks */,
+				6F5DDA7829A89F5000374427 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6F5DDA7829A89F5000374427 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DDA7729A89F5000374427 /* eduVPNProvisioning.app */,
+				6F5DDA8D29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6F5DDA7929A89F5000374427 /* eduVPNProvisioning */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DDA7A29A89F5000374427 /* AppDelegate.swift */,
+				6F5DDA7C29A89F5000374427 /* ViewController.swift */,
+				6F5DDA7E29A89F5100374427 /* Assets.xcassets */,
+				6F5DDA8029A89F5100374427 /* Main.storyboard */,
+				6F5DDA8329A89F5100374427 /* eduVPNProvisioning.entitlements */,
+			);
+			path = eduVPNProvisioning;
+			sourceTree = "<group>";
+		};
+		6F5DDA8E29A89FB500374427 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DDA8F29A89FB500374427 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F5DDA9129A89FB500374427 /* TunnelExtension */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DDA9229A89FB500374427 /* PacketTunnelProvider.swift */,
+				6F5DDA9429A89FB500374427 /* main.swift */,
+				6F5DDA9629A89FB500374427 /* Info.plist */,
+				6F5DDA9729A89FB500374427 /* TunnelExtension.entitlements */,
+			);
+			path = TunnelExtension;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6F5DDA7629A89F5000374427 /* eduVPNProvisioning */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F5DDA8629A89F5100374427 /* Build configuration list for PBXNativeTarget "eduVPNProvisioning" */;
+			buildPhases = (
+				6F5DDA7329A89F5000374427 /* Sources */,
+				6F5DDA7429A89F5000374427 /* Frameworks */,
+				6F5DDA7529A89F5000374427 /* Resources */,
+				6F5DDA9E29A89FB500374427 /* Embed System Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F5DDA9929A89FB500374427 /* PBXTargetDependency */,
+			);
+			name = eduVPNProvisioning;
+			productName = eduVPNProvisioning;
+			productReference = 6F5DDA7729A89F5000374427 /* eduVPNProvisioning.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6F5DDA8C29A89FB500374427 /* TunnelExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F5DDA9B29A89FB500374427 /* Build configuration list for PBXNativeTarget "TunnelExtension" */;
+			buildPhases = (
+				6F5DDA8929A89FB500374427 /* Sources */,
+				6F5DDA8A29A89FB500374427 /* Frameworks */,
+				6F5DDA8B29A89FB500374427 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TunnelExtension;
+			productName = TunnelExtension;
+			productReference = 6F5DDA8D29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension */;
+			productType = "com.apple.product-type.system-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6F5DDA6F29A89F5000374427 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					6F5DDA7629A89F5000374427 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					6F5DDA8C29A89FB500374427 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 6F5DDA7229A89F5000374427 /* Build configuration list for PBXProject "eduVPNProvisioning" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6F5DDA6E29A89F5000374427;
+			productRefGroup = 6F5DDA7829A89F5000374427 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6F5DDA7629A89F5000374427 /* eduVPNProvisioning */,
+				6F5DDA8C29A89FB500374427 /* TunnelExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6F5DDA7529A89F5000374427 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F5DDA7F29A89F5100374427 /* Assets.xcassets in Resources */,
+				6F5DDAA429AC6FFD00374427 /* Config.xcconfig in Resources */,
+				6F5DDA8229A89F5100374427 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F5DDA8B29A89FB500374427 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6F5DDA7329A89F5000374427 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F5DDA7D29A89F5000374427 /* ViewController.swift in Sources */,
+				6F5DDA7B29A89F5000374427 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F5DDA8929A89FB500374427 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F5DDA9529A89FB500374427 /* main.swift in Sources */,
+				6F5DDA9329A89FB500374427 /* PacketTunnelProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6F5DDA9929A89FB500374427 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F5DDA8C29A89FB500374427 /* TunnelExtension */;
+			targetProxy = 6F5DDA9829A89FB500374427 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6F5DDA8029A89F5100374427 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F5DDA8129A89F5100374427 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6F5DDA8429A89F5100374427 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F5DDAA129AC6FFD00374427 /* Config.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6F5DDA8529A89F5100374427 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F5DDAA129AC6FFD00374427 /* Config.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		6F5DDA8729A89F5100374427 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = eduVPNProvisioning/eduVPNProvisioning.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(inherited)";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = $APP_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_ID}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6F5DDA8829A89F5100374427 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = eduVPNProvisioning/eduVPNProvisioning.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(inherited)";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = $APP_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_ID}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6F5DDA9C29A89FB500374427 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TunnelExtension/TunnelExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(inherited)";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TunnelExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TunnelExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = $APP_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_ID}.TunnelExtension";
+				PRODUCT_NAME = "$(inherited)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6F5DDA9D29A89FB500374427 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TunnelExtension/TunnelExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "$(inherited)";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TunnelExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TunnelExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = $APP_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = "${APP_ID}.TunnelExtension";
+				PRODUCT_NAME = "$(inherited)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6F5DDA7229A89F5000374427 /* Build configuration list for PBXProject "eduVPNProvisioning" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F5DDA8429A89F5100374427 /* Debug */,
+				6F5DDA8529A89F5100374427 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F5DDA8629A89F5100374427 /* Build configuration list for PBXNativeTarget "eduVPNProvisioning" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F5DDA8729A89F5100374427 /* Debug */,
+				6F5DDA8829A89F5100374427 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F5DDA9B29A89FB500374427 /* Build configuration list for PBXNativeTarget "TunnelExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F5DDA9C29A89FB500374427 /* Debug */,
+				6F5DDA9D29A89FB500374427 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6F5DDA6F29A89F5000374427 /* Project object */;
+}
