@@ -48,14 +48,16 @@
 		6F5DDA7C29A89F5000374427 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6F5DDA7E29A89F5100374427 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F5DDA8129A89F5100374427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6F5DDA8329A89F5100374427 /* eduVPNProvisioning.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eduVPNProvisioning.entitlements; sourceTree = "<group>"; };
+		6F5DDA8329A89F5100374427 /* eduVPNProvisioning_Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eduVPNProvisioning_Debug.entitlements; sourceTree = "<group>"; };
 		6F5DDA8D29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = net.roopc.eduVPNProvisioning.TunnelExtension.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5DDA8F29A89FB500374427 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		6F5DDA9229A89FB500374427 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		6F5DDA9429A89FB500374427 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6F5DDA9629A89FB500374427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F5DDA9729A89FB500374427 /* TunnelExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TunnelExtension.entitlements; sourceTree = "<group>"; };
+		6F5DDA9729A89FB500374427 /* TunnelExtension_Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TunnelExtension_Debug.entitlements; sourceTree = "<group>"; };
 		6F5DDAA129AC6FFD00374427 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Config/Config.xcconfig; sourceTree = "<group>"; };
+		6F5DDAA729AE6BE600374427 /* eduVPNProvisioning_Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = eduVPNProvisioning_Release.entitlements; sourceTree = "<group>"; };
+		6F5DDAA829AE6CF600374427 /* TunnelExtension_Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TunnelExtension_Release.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +106,8 @@
 				6F5DDA7C29A89F5000374427 /* ViewController.swift */,
 				6F5DDA7E29A89F5100374427 /* Assets.xcassets */,
 				6F5DDA8029A89F5100374427 /* Main.storyboard */,
-				6F5DDA8329A89F5100374427 /* eduVPNProvisioning.entitlements */,
+				6F5DDAA729AE6BE600374427 /* eduVPNProvisioning_Release.entitlements */,
+				6F5DDA8329A89F5100374427 /* eduVPNProvisioning_Debug.entitlements */,
 			);
 			path = eduVPNProvisioning;
 			sourceTree = "<group>";
@@ -123,7 +126,8 @@
 				6F5DDA9229A89FB500374427 /* PacketTunnelProvider.swift */,
 				6F5DDA9429A89FB500374427 /* main.swift */,
 				6F5DDA9629A89FB500374427 /* Info.plist */,
-				6F5DDA9729A89FB500374427 /* TunnelExtension.entitlements */,
+				6F5DDAA829AE6CF600374427 /* TunnelExtension_Release.entitlements */,
+				6F5DDA9729A89FB500374427 /* TunnelExtension_Debug.entitlements */,
 			);
 			path = TunnelExtension;
 			sourceTree = "<group>";
@@ -386,7 +390,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = eduVPNProvisioning/eduVPNProvisioning.entitlements;
+				CODE_SIGN_ENTITLEMENTS = eduVPNProvisioning/eduVPNProvisioning_Debug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -415,7 +419,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = eduVPNProvisioning/eduVPNProvisioning.entitlements;
+				CODE_SIGN_ENTITLEMENTS = eduVPNProvisioning/eduVPNProvisioning_Release.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -441,7 +445,7 @@
 		6F5DDA9C29A89FB500374427 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = TunnelExtension/TunnelExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TunnelExtension/TunnelExtension_Debug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "$(inherited)";
@@ -469,7 +473,7 @@
 		6F5DDA9D29A89FB500374427 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = TunnelExtension/TunnelExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TunnelExtension/TunnelExtension_Release.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "$(inherited)";
