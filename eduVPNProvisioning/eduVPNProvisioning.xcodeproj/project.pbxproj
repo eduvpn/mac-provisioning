@@ -16,6 +16,7 @@
 		6F5DDA9529A89FB500374427 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DDA9429A89FB500374427 /* main.swift */; };
 		6F5DDA9A29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 6F5DDA8D29A89FB500374427 /* net.roopc.eduVPNProvisioning.TunnelExtension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F5DDAA429AC6FFD00374427 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DDAA129AC6FFD00374427 /* Config.xcconfig */; };
+		6FD1029C29C97DD2006333C6 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1029B29C97DD2006333C6 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		6F5DDAA129AC6FFD00374427 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Config/Config.xcconfig; sourceTree = "<group>"; };
 		6F5DDAA729AE6BE600374427 /* eduVPNProvisioning_Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = eduVPNProvisioning_Release.entitlements; sourceTree = "<group>"; };
 		6F5DDAA829AE6CF600374427 /* TunnelExtension_Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TunnelExtension_Release.entitlements; sourceTree = "<group>"; };
+		6FD1029B29C97DD2006333C6 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				6F5DDA9629A89FB500374427 /* Info.plist */,
 				6F5DDAA829AE6CF600374427 /* TunnelExtension_Release.entitlements */,
 				6F5DDA9729A89FB500374427 /* TunnelExtension_Debug.entitlements */,
+				6FD1029B29C97DD2006333C6 /* Logger.swift */,
 			);
 			path = TunnelExtension;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F5DDA9529A89FB500374427 /* main.swift in Sources */,
+				6FD1029C29C97DD2006333C6 /* Logger.swift in Sources */,
 				6F5DDA9329A89FB500374427 /* PacketTunnelProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
