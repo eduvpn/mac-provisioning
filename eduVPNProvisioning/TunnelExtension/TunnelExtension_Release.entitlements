@@ -8,5 +8,9 @@
 	</array>
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
+	<key>com.apple.security.temporary-exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/Library/Keychains/</string>
+	</array>
 </dict>
 </plist>
