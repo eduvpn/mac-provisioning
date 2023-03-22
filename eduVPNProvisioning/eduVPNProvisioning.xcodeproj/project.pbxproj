@@ -19,6 +19,7 @@
 		6FD1029C29C97DD2006333C6 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1029B29C97DD2006333C6 /* Logger.swift */; };
 		6FD102A529CAB5A5006333C6 /* KeychainCertificateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD102A429CAB5A5006333C6 /* KeychainCertificateManager.swift */; };
 		6FD102A629CAB5A5006333C6 /* KeychainCertificateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD102A429CAB5A5006333C6 /* KeychainCertificateManager.swift */; };
+		6FD102A829CAB6CC006333C6 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1029B29C97DD2006333C6 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,7 +135,6 @@
 				6F5DDA9629A89FB500374427 /* Info.plist */,
 				6F5DDAA829AE6CF600374427 /* TunnelExtension_Release.entitlements */,
 				6F5DDA9729A89FB500374427 /* TunnelExtension_Debug.entitlements */,
-				6FD1029B29C97DD2006333C6 /* Logger.swift */,
 			);
 			path = TunnelExtension;
 			sourceTree = "<group>";
@@ -142,6 +142,7 @@
 		6FD102A029CAB0F1006333C6 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				6FD1029B29C97DD2006333C6 /* Logger.swift */,
 				6FD102A429CAB5A5006333C6 /* KeychainCertificateManager.swift */,
 			);
 			path = Shared;
@@ -251,6 +252,7 @@
 				6F5DDA7D29A89F5000374427 /* ViewController.swift in Sources */,
 				6F5DDA7B29A89F5000374427 /* AppDelegate.swift in Sources */,
 				6FD102A529CAB5A5006333C6 /* KeychainCertificateManager.swift in Sources */,
+				6FD102A829CAB6CC006333C6 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
