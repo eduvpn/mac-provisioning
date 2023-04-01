@@ -17,13 +17,20 @@ class PersistenceManager {
         let profileId: String
         let deviceId: String
         let vpnConfigType: VPNConfigType
-        let vpnConfigExpiryDate: Date
+        let vpnConfigExpiryDate: Date?
         let keychainReference: KeychainStorageManager.KeychainReference
 
         var description: String {
-            """
+            let expiryString = {
+                if let vpnConfigExpiryDate = vpnConfigExpiryDate {
+                    return "\(vpnConfigExpiryDate)"
+                } else {
+                    return "Not present"
+                }
+            }()
+            return """
             server: \(intermediateServerBaseURL.absoluteString), profile id: \(profileId), \
-            device id: \(deviceId), type: \(vpnConfigType), expiry: \(vpnConfigExpiryDate)
+            device id: \(deviceId), type: \(vpnConfigType), expiry: \(expiryString)
             """
         }
     }
