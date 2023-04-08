@@ -24,43 +24,49 @@ class VPNConfigManager {
         self.logger = logger
     }
 
-    func getVPNConfig(
-        intermediateServerBaseURL: URL,
-        profileId: String,
-        vpnConfigType: VPNConfigType) async -> VPNConfigFetcher.VPNConfigData? {
-            guard let deviceCertData = self.keychainCertificateManager.getDeviceCertificateData() else {
-                self.logger.log("VPNConfigManager.getVPNConfig: No device certificate found")
-                return nil
-            }
+    func getVPNConfig(providerConfiguration: ProviderConfiguration,
+                      vpnConfigType: VPNConfigType) async -> VPNConfigFetcher.VPNConfigData? {
+        guard let deviceCertData = self.keychainCertificateManager.getDeviceCertificateData() else {
+            self.logger.log("VPNConfigManager.getVPNConfig: No device certificate found")
+            return nil
+        }
 
-            let deviceId = deviceCertData.deviceId
-            self.logger.log("VPNConfigManager.getVPNConfig: Trying to retrieve saved VPN config")
-            let savedVPNConfigData = getSavedVPNConfig(
-                persistenceManager: self.persistenceManager,
-                keychainStorageManager: self.keychainStorageManager,
-                intermediateServerBaseURL: intermediateServerBaseURL,
-                profileId: profileId,
-                deviceId: deviceId,
-                vpnConfigType: .wireguard)
+        let deviceId = deviceCertData.deviceId
+        let intermediateServerBaseURL = providerConfiguration.intermediateServerBaseURL
+        let profileId = providerConfiguration.profileId
 
-            if let savedVPNConfigData = savedVPNConfigData {
-                return savedVPNConfigData
-            }
+        self.logger.log("VPNConfigManager.getVPNConfig: Trying to retrieve saved VPN config")
+        let savedVPNConfigData = getSavedVPNConfig(
+            persistenceManager: self.persistenceManager,
+            keychainStorageManager: self.keychainStorageManager,
+            intermediateServerBaseURL: intermediateServerBaseURL,
+            profileId: profileId,
+            deviceId: deviceId,
+            vpnConfigType: vpnConfigType)
 
-            guard let clientIdentity = keychainCertificateManager.getClientIdentity(
-                with: deviceCertData.deviceCertificate) else {
-                self.logger.log("VPNConfigManager.getVPNConfig: Could not locate client identity in keychain")
-                return nil
-            }
+        if let savedVPNConfigData = savedVPNConfigData {
+            return savedVPNConfigData
+        }
 
-            self.logger.log("VPNConfigManager.getVPNConfig: Fetching VPN config from server")
-            let fetchedVPNConfigData = await fetchVPNConfigFromServer(
-                intermediateServerBaseURL: intermediateServerBaseURL,
-                profileId: profileId,
-                deviceId: deviceId,
-                clientIdentity: clientIdentity)
+        guard let clientIdentity = keychainCertificateManager.getClientIdentity(
+            with: deviceCertData.deviceCertificate) else {
+            self.logger.log("VPNConfigManager.getVPNConfig: Could not locate client identity in keychain")
+            return nil
+        }
+
+        self.logger.log("VPNConfigManager.getVPNConfig: Fetching VPN config from server")
+        let fetchedVPNConfigData = await fetchVPNConfigFromServer(
+            intermediateServerBaseURL: intermediateServerBaseURL,
+            profileId: profileId,
+            deviceId: deviceId,
+            clientIdentity: clientIdentity)
 
         if let fetchedVPNConfigData = fetchedVPNConfigData {
+            guard fetchedVPNConfigData.vpnConfigType == vpnConfigType else {
+                self.logger.log("VPNConfigManager.getVPNConfig: Fetched VPN config is not of the required type")
+                return nil
+            }
+
             if let previousKeychainReference = self.persistenceManager.retrieveFromDisk()?.keychainReference {
                 self.logger.log("VPNConfigManager.getVPNConfig: Deleting currently saved VPN config in keychain")
                 self.keychainStorageManager.deleteVPNConfig(keychainReference: previousKeychainReference)
@@ -109,8 +115,8 @@ private extension VPNConfigManager {
             (persistableData.profileId == profileId) &&
             (persistableData.vpnConfigType == vpnConfigType) {
             if let vpnConfigExpiryDate = persistableData.vpnConfigExpiryDate,
-               (vpnConfigExpiryDate.timeIntervalSince(Date()) > 60 * 2 /* 2 minutes */) {
-                self.logger.log("VPNConfigManager.getSavedVPNConfig: Retrieved VPN config is about to expire (expires at \(vpnConfigExpiryDate)")
+               (vpnConfigExpiryDate.timeIntervalSince(Date()) < 60 * 2 /* 2 minutes */) {
+                self.logger.log("VPNConfigManager.getSavedVPNConfig: Retrieved VPN config is about to expire (expires at \(vpnConfigExpiryDate))")
                 return nil
             }
             if let vpnConfig = keychainStorageManager.retrieveVPNConfig(keychainReference: persistableData.keychainReference) {

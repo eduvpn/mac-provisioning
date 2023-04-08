@@ -7,17 +7,58 @@
 
 import NetworkExtension
 
+enum PacketTunnelProviderError: Error {
+    case cantFindProtocolConfiguration
+    case cantFindProviderConfiguration
+    case invalidProviderConfiguration
+}
+
 class PacketTunnelProvider: NEPacketTunnelProvider {
 
-    override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+    var logger: Logger?
+    var vpnConfigManager: VPNConfigManager?
+
+    override func startTunnel(options: [String : NSObject]? = nil) async throws {
         // Add code here to start the process of connecting the tunnel.
-        NSLog("startTunnel")
+        let logger = Logger()
+        self.logger = logger
+
+        logger.log("Starting tunnel")
+
+        guard let protocolConfiguration = self.protocolConfiguration as? NETunnelProviderProtocol else {
+            logger.log("Can't find protocolConfiguration")
+            throw PacketTunnelProviderError.cantFindProtocolConfiguration
+        }
+
+        guard let protocolProviderConfiguration = protocolConfiguration.providerConfiguration else {
+            logger.log("Can't find NETunnelProviderProtocol.providerConfiguration")
+            throw PacketTunnelProviderError.cantFindProviderConfiguration
+        }
+
+        guard let providerConfiguration = ProviderConfiguration(protocolProviderConfiguration: protocolProviderConfiguration, logger: logger) else {
+            logger.log("Invalid NETunnelProviderProtocol.providerConfiguration. Available keys: \(protocolProviderConfiguration.keys)")
+            throw PacketTunnelProviderError.invalidProviderConfiguration
+        }
+
+        let persistenceManager = PersistenceManager(logger: logger)
+        let keychainStorageManager = KeychainStorageManager(logger: logger)
+        let keychainCertificateManager = KeychainCertificateManager(issuerNames: ["Microsoft Intune MDM Agent CA"], logger: logger)
+
+        let vpnConfigManager = VPNConfigManager(persistenceManager: persistenceManager,
+                                                keychainStorageManager: keychainStorageManager,
+                                                keychainCertificateManager: keychainCertificateManager,
+                                                logger: logger)
+        self.vpnConfigManager = vpnConfigManager
+
+        let vpnConfigData = await vpnConfigManager.getVPNConfig(providerConfiguration: providerConfiguration, vpnConfigType: .wireguard)
+
+        NSLog("vpnConfigData = \(vpnConfigData)")
+
         let networkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: "127.0.0.1")
-        setTunnelNetworkSettings(networkSettings) { error in
-            if let error = error {
-                NSLog("setTunnelNetworkSettings error: \(error)")
-            }
-            completionHandler(error)
+        do {
+            try await setTunnelNetworkSettings(networkSettings)
+        } catch {
+            NSLog("setTunnelNetworkSettings error: \(error)")
         }
     }
 
