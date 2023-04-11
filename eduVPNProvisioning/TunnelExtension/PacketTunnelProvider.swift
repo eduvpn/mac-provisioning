@@ -20,7 +20,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 
     override func startTunnel(options: [String : NSObject]? = nil) async throws {
         // Add code here to start the process of connecting the tunnel.
-        let logger = Logger()
+        let logger = Logger(appComponent: .tunnelExtension)
         self.logger = logger
 
         logger.log("Starting tunnel")
