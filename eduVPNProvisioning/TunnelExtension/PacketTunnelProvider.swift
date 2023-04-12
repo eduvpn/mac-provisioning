@@ -6,17 +6,26 @@
 //
 
 import NetworkExtension
+import WireGuardKit
 
 enum PacketTunnelProviderError: Error {
     case cantFindProtocolConfiguration
     case cantFindProviderConfiguration
     case invalidProviderConfiguration
+    case couldNotGetVPNConfig
+    case couldNotParseWgQuickConfig
 }
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
 
     var logger: Logger?
     var vpnConfigManager: VPNConfigManager?
+
+    private lazy var adapter: WireGuardAdapter = {
+        return WireGuardAdapter(with: self) { [weak self] _, message in
+            self?.logger?.log(message)
+        }
+    }()
 
     override func startTunnel(options: [String : NSObject]? = nil) async throws {
         // Add code here to start the process of connecting the tunnel.
@@ -50,37 +59,81 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                                                 logger: logger)
         self.vpnConfigManager = vpnConfigManager
 
-        let vpnConfigData = await vpnConfigManager.getVPNConfig(providerConfiguration: providerConfiguration, vpnConfigType: .wireguard)
-
-        NSLog("vpnConfigData = \(vpnConfigData)")
-
-        let networkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: "127.0.0.1")
-        do {
-            try await setTunnelNetworkSettings(networkSettings)
-        } catch {
-            NSLog("setTunnelNetworkSettings error: \(error)")
+        guard let vpnConfigData = await vpnConfigManager.getVPNConfig(
+            providerConfiguration: providerConfiguration, vpnConfigType: .wireguard) else {
+            logger.log("Could not get VPN config")
+            throw PacketTunnelProviderError.couldNotGetVPNConfig
         }
+
+        assert(vpnConfigData.vpnConfigType == .wireguard)
+        guard let tunnelConfiguration = try? TunnelConfiguration(fromWgQuickConfig: vpnConfigData.vpnConfig) else {
+            logger.log("wg-quick config not parseable")
+            throw PacketTunnelProviderError.couldNotParseWgQuickConfig
+        }
+
+        do {
+            logger.log("Starting WireGuard")
+            try await adapter.start(tunnelConfiguration: tunnelConfiguration)
+        } catch {
+            logger.log("Error starting WireGuard: \(error.localizedDescription)")
+            throw error
+        }
+
+        logger.log("Tunnel interface is \(adapter.interfaceName ?? "unknown")")
     }
 
-    override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        // Add code here to start the process of stopping the tunnel.
-        NSLog("stopTunnel")
-        completionHandler()
+    override func stopTunnel(with reason: NEProviderStopReason) async {
+        logger?.log("Stopping tunnel because: \(reason)")
+        do {
+            try await adapter.stop()
+        } catch {
+            logger?.log("Error stopping WireGuard: \(error.localizedDescription)")
+        }
+        #if os(macOS)
+        // HACK: We have to kill the tunnel process ourselves because of a macOS bug
+        exit(0)
+        #endif
     }
 
     override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)?) {
-        // Add code here to handle the message.
-        if let handler = completionHandler {
-            handler(messageData)
-        }
+        // No app messages are handled
+        completionHandler?(nil)
     }
 
     override func sleep(completionHandler: @escaping () -> Void) {
         // Add code here to get ready to sleep.
+        logger?.log("Sleep")
         completionHandler()
     }
 
     override func wake() {
+        logger?.log("Wake")
         // Add code here to wake up.
+    }
+}
+
+extension WireGuardAdapter {
+    func start(tunnelConfiguration: TunnelConfiguration) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            start(tunnelConfiguration: tunnelConfiguration) { error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
+        }
+    }
+
+    func stop() async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            stop { error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
+        }
     }
 }
