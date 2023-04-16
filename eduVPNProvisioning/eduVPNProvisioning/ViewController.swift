@@ -9,6 +9,8 @@ import Cocoa
 
 class ViewController: NSViewController {
 
+    var systemExtensionInstaller: SystemExtensionInstaller? = nil
+
     @IBOutlet weak var appLogPathLabel: NSTextField!
     @IBOutlet weak var tunnelLogPathLabel: NSTextField!
 
@@ -34,7 +36,35 @@ class ViewController: NSViewController {
     }
 
     @IBAction func installSystemExtensionClicked(_ sender: Any) {
-        NSLog("installSystemExtensionClicked")
+        guard let systemExtensionInstaller = systemExtensionInstaller else {
+            fatalError("System Extension Installer is not set")
+        }
+        Task {
+            var installError: Error?
+            do {
+                try await systemExtensionInstaller.installSystemExtension()
+            } catch {
+                installError = error
+            }
+
+            let alert = NSAlert()
+            if let installError = installError {
+                alert.messageText = "System Extension Installation Failed"
+                if let systemExtensionInstallError = installError as? SystemExtensionInstallerError {
+                    alert.informativeText = systemExtensionInstallError.rawValue
+                } else {
+                    alert.informativeText = installError.localizedDescription
+                }
+                alert.alertStyle = .critical
+            } else {
+                alert.messageText = "System Extension Installed"
+                alert.informativeText = "The tunnel system extension was installed successfully"
+                alert.alertStyle = .informational
+            }
+            if let window = self.view.window {
+                await alert.beginSheetModal(for: window)
+            }
+        }
     }
 
     @IBAction func enableOnDemandVPNClicked(_ sender: Any) {

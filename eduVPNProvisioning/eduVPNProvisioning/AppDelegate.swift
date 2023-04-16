@@ -11,7 +11,15 @@ import SystemExtensions
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    var systemExtensionInstaller: SystemExtensionInstaller?
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let mainWindow = NSApp.windows.first
+        let viewController = mainWindow?.contentViewController as? ViewController
+
+        let systemExtensionInstaller = SystemExtensionInstaller()
+        self.systemExtensionInstaller = systemExtensionInstaller
+        viewController?.systemExtensionInstaller = systemExtensionInstaller
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
