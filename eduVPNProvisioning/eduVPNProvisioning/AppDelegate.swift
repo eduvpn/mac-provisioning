@@ -12,7 +12,6 @@ import SystemExtensions
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        beginSystemExtensionInstallation()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -58,7 +57,6 @@ extension AppDelegate: OSSystemExtensionRequestDelegate {
         } else {
             NSLog("System Extension: OSSystemExtensionRequest code = \(result.rawValue)")
         }
-        NSApp.terminate(self)
     }
 
     func request(_ request: OSSystemExtensionRequest, didFailWithError error: Error) {
