@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1A18C329EC4A1800955FE7 /* SystemExtensionInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A18C229EC4A1800955FE7 /* SystemExtensionInstaller.swift */; };
 		6F5DDA7B29A89F5000374427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DDA7A29A89F5000374427 /* AppDelegate.swift */; };
 		6F5DDA7D29A89F5000374427 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DDA7C29A89F5000374427 /* ViewController.swift */; };
 		6F5DDA7F29A89F5100374427 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DDA7E29A89F5100374427 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6F1A18C229EC4A1800955FE7 /* SystemExtensionInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensionInstaller.swift; sourceTree = "<group>"; };
 		6F5DDA7729A89F5000374427 /* eduVPNProvisioning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eduVPNProvisioning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5DDA7A29A89F5000374427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F5DDA7C29A89F5000374427 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				6F5DDA7A29A89F5000374427 /* AppDelegate.swift */,
 				6F5DDA7C29A89F5000374427 /* ViewController.swift */,
+				6F1A18C229EC4A1800955FE7 /* SystemExtensionInstaller.swift */,
 				6F5DDA7E29A89F5100374427 /* Assets.xcassets */,
 				6F5DDA8029A89F5100374427 /* Main.storyboard */,
 				6F5DDAA729AE6BE600374427 /* eduVPNProvisioning_Release.entitlements */,
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F96D1FC29DE8AB700766204 /* ProviderConfiguration.swift in Sources */,
+				6F1A18C329EC4A1800955FE7 /* SystemExtensionInstaller.swift in Sources */,
 				6F5DDA7D29A89F5000374427 /* ViewController.swift in Sources */,
 				6F5DDA7B29A89F5000374427 /* AppDelegate.swift in Sources */,
 				6FD102A529CAB5A5006333C6 /* KeychainCertificateManager.swift in Sources */,
