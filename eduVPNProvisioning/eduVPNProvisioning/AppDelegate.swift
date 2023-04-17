@@ -11,13 +11,17 @@ import SystemExtensions
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    var logger: Logger?
     var systemExtensionInstaller: SystemExtensionInstaller?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let mainWindow = NSApp.windows.first
         let viewController = mainWindow?.contentViewController as? ViewController
 
-        let systemExtensionInstaller = SystemExtensionInstaller()
+        let logger = Logger(appComponent: .containerApp)
+        self.logger = logger
+
+        let systemExtensionInstaller = SystemExtensionInstaller(logger: logger)
         self.systemExtensionInstaller = systemExtensionInstaller
         viewController?.systemExtensionInstaller = systemExtensionInstaller
     }

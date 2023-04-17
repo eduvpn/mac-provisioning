@@ -17,16 +17,24 @@ enum SystemExtensionInstallerError: String, Error {
 }
 
 class SystemExtensionInstaller: NSObject {
+
+    private var logger: Logger
     private var isInstalling = false
     private var continuation: CheckedContinuation<(), Error>?
+
+    init(logger: Logger) {
+        self.logger = logger
+    }
 
     func installSystemExtension() async throws {
 
         guard !self.isInstalling else {
+            self.logger.log("SystemExtensionInstaller.installSystemExtension: Error: An installation is already in progress")
             throw SystemExtensionInstallerError.installAlreadyInProgress
         }
 
         guard let appId = Bundle.main.bundleIdentifier else {
+            self.logger.log("SystemExtensionInstaller.installSystemExtension: Error: Cannot get bundle id")
             throw SystemExtensionInstallerError.cannotGetBundleId
         }
 
@@ -34,6 +42,7 @@ class SystemExtensionInstaller: NSObject {
             self.isInstalling = true
             self.continuation = continuation
             let tunnelExtensionBundleId = "\(appId).TunnelExtension"
+            self.logger.log("SystemExtensionInstaller.installSystemExtension: Requesting installation of system extension")
             let request = OSSystemExtensionRequest.activationRequest(
                 forExtensionWithIdentifier: tunnelExtensionBundleId,
                 queue: DispatchQueue.main)
@@ -45,6 +54,7 @@ class SystemExtensionInstaller: NSObject {
 
 extension SystemExtensionInstaller: OSSystemExtensionRequestDelegate {
     func request(_ request: OSSystemExtensionRequest, actionForReplacingExtension existing: OSSystemExtensionProperties, withExtension ext: OSSystemExtensionProperties) -> OSSystemExtensionRequest.ReplacementAction {
+        self.logger.log("SystemExtensionInstaller: Allowing replacement of version \(existing.bundleShortVersion) with version \(ext.bundleShortVersion)")
         return .replace
     }
 
@@ -54,6 +64,7 @@ extension SystemExtensionInstaller: OSSystemExtensionRequestDelegate {
             return
         }
         self.isInstalling = false
+        self.logger.log("SystemExtensionInstaller: Error: Installation requires user approval")
         self.continuation?.resume(throwing: SystemExtensionInstallerError.installRequiresUserApproval)
     }
 
@@ -65,10 +76,13 @@ extension SystemExtensionInstaller: OSSystemExtensionRequestDelegate {
         self.isInstalling = false
         switch result {
             case .completed:
+                self.logger.log("SystemExtensionInstaller: Installed successfully")
                 self.continuation?.resume()
             case .willCompleteAfterReboot:
+                self.logger.log("SystemExtensionInstaller: Error: Installation requires reboot")
                 self.continuation?.resume(throwing: SystemExtensionInstallerError.installRequiresReboot)
             @unknown default:
+                self.logger.log("SystemExtensionInstaller: Error: Installation result unexpected")
                 self.continuation?.resume(throwing: SystemExtensionInstallerError.installResultWasUnexpected)
         }
     }
@@ -79,6 +93,7 @@ extension SystemExtensionInstaller: OSSystemExtensionRequestDelegate {
             return
         }
         self.isInstalling = false
+        self.logger.log("SystemExtensionInstaller: Error: Installation failed: \(error.localizedDescription)")
         self.continuation?.resume(throwing: error)
     }
 }
