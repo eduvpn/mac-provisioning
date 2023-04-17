@@ -29,12 +29,6 @@ class ViewController: NSViewController {
         tunnelLogPathLabel.stringValue = tunnelLogPath
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
     @IBAction func installSystemExtensionClicked(_ sender: Any) {
         guard let systemExtensionInstaller = systemExtensionInstaller else {
             fatalError("System Extension Installer is not set")
