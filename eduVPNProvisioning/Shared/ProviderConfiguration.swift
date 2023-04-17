@@ -44,4 +44,8 @@ struct ProviderConfiguration {
         self.intermediateServerBaseURL = intermediateServerBaseURL
         self.profileId = profileId
     }
+
+    var description: String {
+        "(server: \(intermediateServerBaseURL.absoluteString), profile id: \(profileId))"
+    }
 }
