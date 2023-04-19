@@ -10,6 +10,7 @@ import Cocoa
 class ViewController: NSViewController {
 
     var systemExtensionInstaller: SystemExtensionInstaller? = nil
+    var tunnelManager: TunnelManager? = nil
 
     @IBOutlet weak var appLogPathLabel: NSTextField!
     @IBOutlet weak var tunnelLogPathLabel: NSTextField!
@@ -62,7 +63,35 @@ class ViewController: NSViewController {
     }
 
     @IBAction func enableOnDemandVPNClicked(_ sender: Any) {
-        NSLog("enableOnDemandVPNClicked")
+        guard let tunnelManager = tunnelManager else {
+            fatalError("Tunnel Manager is not set")
+        }
+        Task {
+            var tunnelConfigError: Error?
+            do {
+                try await tunnelManager.setupTunnelConfiguration()
+            } catch {
+                tunnelConfigError = error
+            }
+
+            let alert = NSAlert()
+            if let tunnelConfigError = tunnelConfigError {
+                alert.messageText = "Setting up Tunnel Configuration Failed"
+                if let tunnelManagerError = tunnelConfigError as? TunnelManagerError {
+                    alert.informativeText = tunnelManagerError.rawValue
+                } else {
+                    alert.informativeText = tunnelConfigError.localizedDescription
+                }
+                alert.alertStyle = .critical
+            } else {
+                alert.messageText = "Tunnel Configured with On-Demand"
+                alert.informativeText = "On-demand was set on the tunnel successfully"
+                alert.alertStyle = .informational
+            }
+            if let window = self.view.window {
+                await alert.beginSheetModal(for: window)
+            }
+        }
     }
 
     @IBAction func copyAppLogPathClicked(_ sender: Any) {

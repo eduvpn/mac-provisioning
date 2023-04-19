@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var logger: Logger?
     var systemExtensionInstaller: SystemExtensionInstaller?
+    var tunnelManager: TunnelManager?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let mainWindow = NSApp.windows.first
@@ -24,6 +25,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let systemExtensionInstaller = SystemExtensionInstaller(logger: logger)
         self.systemExtensionInstaller = systemExtensionInstaller
         viewController?.systemExtensionInstaller = systemExtensionInstaller
+
+        let tunnelManager = TunnelManager(logger: logger)
+        self.tunnelManager = tunnelManager
+        viewController?.tunnelManager = tunnelManager
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
