@@ -61,12 +61,7 @@ class Logger {
             timer.schedule(deadline: .now() + .seconds(5), leeway: .seconds(1))
             timer.setEventHandler { [weak self] in
                 guard let self = self else { return }
-
-                let timestamp = self.dateFormatter.string(from: Date())
-                let line = "\(timestamp) Flushing log to disk by timer\n"
-                Self.write(line, to: logFileHandle, osLog: self.osLog)
                 Self.flush(logFileHandle)
-
                 self.timer = nil
             }
             timer.resume()
