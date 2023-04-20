@@ -18,8 +18,8 @@ enum PacketTunnelProviderError: Error {
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
 
-    var logger: Logger?
-    var vpnConfigManager: VPNConfigManager?
+    private var logger: Logger?
+    private var vpnConfigManager: VPNConfigManager?
 
     private lazy var adapter: WireGuardAdapter = {
         return WireGuardAdapter(with: self) { [weak self] _, message in
