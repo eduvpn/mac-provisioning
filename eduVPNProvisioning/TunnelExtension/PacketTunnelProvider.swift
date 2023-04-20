@@ -14,12 +14,16 @@ enum PacketTunnelProviderError: Error {
     case invalidProviderConfiguration
     case couldNotGetVPNConfig
     case couldNotParseWgQuickConfig
+    case tunnelConfigurationExpired
 }
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
 
     private var logger: Logger?
     private var vpnConfigManager: VPNConfigManager?
+
+    private var timer: DispatchSourceTimer? = nil
+    private var timerQueue: DispatchQueue = DispatchQueue(label: "TimerQueue", qos: .default)
 
     private lazy var adapter: WireGuardAdapter = {
         return WireGuardAdapter(with: self) { [weak self] _, message in
@@ -63,6 +67,31 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             providerConfiguration: providerConfiguration, vpnConfigType: .wireguard) else {
             logger.log("Could not get VPN config")
             throw PacketTunnelProviderError.couldNotGetVPNConfig
+        }
+
+        if let expiryDate = vpnConfigData.vpnConfigExpiryDate {
+            logger.log("Got VPN config expiring at: \(expiryDate)")
+            let secondsToExpiry = Int(expiryDate.timeIntervalSince(Date()))
+            if secondsToExpiry <= 0 {
+                self.logger?.log("Config has already expired. Cancelling tunnel.")
+                self.cancelTunnelWithError(PacketTunnelProviderError.tunnelConfigurationExpired)
+                self.timer?.cancel()
+                self.timer = nil
+            } else {
+                let timer = DispatchSource.makeTimerSource(queue: self.timerQueue)
+                self.logger?.log("Scheduling timer to cancel tunnel after \(secondsToExpiry) seconds")
+                timer.schedule(deadline: .now() + .seconds(secondsToExpiry), leeway: .seconds(1))
+                timer.setEventHandler { [weak self] in
+                    guard let self = self else { return }
+                    self.logger?.log("Config has expired (invoked by timer). Cancelling tunnel.")
+                    self.cancelTunnelWithError(PacketTunnelProviderError.tunnelConfigurationExpired)
+                    self.timer = nil
+                }
+                timer.resume()
+                self.timer = timer
+            }
+        } else {
+            logger.log("Got VPN config. Expiry is unknown.")
         }
 
         assert(vpnConfigData.vpnConfigType == .wireguard)

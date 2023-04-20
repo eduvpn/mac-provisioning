@@ -88,8 +88,6 @@ class VPNConfigManager {
             self.logger.log("VPNConfigManager.getVPNConfig: Writing new VPN config metadata to disk")
             persistenceManager.saveToDisk(persistableData)
 
-            // TODO: Schedule fetching VPN config at expiry time
-
             return fetchedVPNConfigData
         }
 
@@ -115,8 +113,8 @@ private extension VPNConfigManager {
             (persistableData.profileId == profileId) &&
             (persistableData.vpnConfigType == vpnConfigType) {
             if let vpnConfigExpiryDate = persistableData.vpnConfigExpiryDate,
-               (vpnConfigExpiryDate.timeIntervalSince(Date()) < 60 * 2 /* 2 minutes */) {
-                self.logger.log("VPNConfigManager.getSavedVPNConfig: Retrieved VPN config is about to expire (expires at \(vpnConfigExpiryDate))")
+               (vpnConfigExpiryDate.timeIntervalSince(Date()) < 0) {
+                self.logger.log("VPNConfigManager.getSavedVPNConfig: Retrieved VPN config has expired")
                 return nil
             }
             if let vpnConfig = keychainStorageManager.retrieveVPNConfig(keychainReference: persistableData.keychainReference) {
