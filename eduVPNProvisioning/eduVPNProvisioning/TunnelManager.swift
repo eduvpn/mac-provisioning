@@ -9,6 +9,7 @@ import Foundation
 import NetworkExtension
 
 enum TunnelManagerError: String, Error {
+    case noDeviceCertificateFoundInKeychain = "No device certificate found in the keychain"
     case noValidTunnelConfigurationFound = "No valid tunnel configuration found"
     case onDemandIsAlreadyEnabled = "On-Demand is already enabled"
 }
@@ -22,6 +23,11 @@ class TunnelManager {
     }
 
     func setupTunnelConfiguration() async throws {
+        guard checkDeviceCertificate() else {
+            self.logger.log("TunnelManager.setupTunnelConfiguration: Aborting because device certificate is not found")
+            throw TunnelManagerError.noDeviceCertificateFoundInKeychain
+        }
+
         self.logger.log("TunnelManager.setupTunnelConfiguration: Getting tunnel provider manager")
         let tunnelProviderManager = try await getTunnelProviderManager()
         self.logger.log("TunnelManager.setupTunnelConfiguration: Enabling on-demand")
@@ -30,6 +36,16 @@ class TunnelManager {
 }
 
 private extension TunnelManager {
+    func checkDeviceCertificate() -> Bool {
+        let keychainCertificateManager = KeychainCertificateManager(issuerNames: ["Microsoft Intune MDM Agent CA"], logger: logger)
+        guard let _ = keychainCertificateManager.getDeviceCertificateData() else {
+            logger.log("TunnelManager.checkDeviceCertificate: No device certificate found. Aborting setting up tunnel.")
+            return false
+        }
+        logger.log("TunnelManager.checkDeviceCertificate: Device certificate found.")
+        return true
+    }
+
     func getTunnelProviderManager() async throws -> NETunnelProviderManager {
         let managers = try await NETunnelProviderManager.loadAllFromPreferences()
         let count = managers.count
