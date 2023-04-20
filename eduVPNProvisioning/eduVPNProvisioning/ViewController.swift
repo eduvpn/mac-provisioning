@@ -95,11 +95,17 @@ class ViewController: NSViewController {
     }
 
     @IBAction func copyAppLogPathClicked(_ sender: Any) {
-        NSLog("copyAppLogPathClicked")
+        setPasteboardString(self.appLogPath)
     }
 
     @IBAction func copyTunnelLogPathClicked(_ sender: Any) {
-        NSLog("copyTunnelLogPathClicked")
+        setPasteboardString(self.tunnelLogPath)
+    }
+
+    private func setPasteboardString(_ string: String) {
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(string, forType: .string)
     }
 }
 
