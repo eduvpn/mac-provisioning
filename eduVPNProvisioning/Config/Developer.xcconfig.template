@@ -1,4 +1,4 @@
-# Copy to Config.xcconfig and populate the values
+# Copy to Developer.xcconfig and populate the values
 
 APP_NAME = <app name> # Use "quotes" if the name has spaces or special characters
 
